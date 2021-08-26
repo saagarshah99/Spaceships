@@ -1,35 +1,24 @@
-.container {
+.space-container {
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid black;
   height: 98vh;
 }
-
-.collideme {
+.space-container .collidable-object {
   border-radius: 50%;
   height: 50px;
   width: 50px;
   display: inline-block;
-  background-color: blue;
   position: absolute;
 }
-
-#divone {
-  background-color: blue;
-  left: 0;
-  top: 0;
-}
-
-#divtwo {
-  background-color: red;
+.space-container #spaceship {
+  background-color: #01bcf5;
   height: 20px;
   width: 20px;
   left: 50%;
   top: 50%;
 }
-
-/* .collision-state {background-color: green !important;} */
-.hide-me {
+.space-container .hidden {
   display: none;
 }
