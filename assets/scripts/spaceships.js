@@ -1,38 +1,46 @@
 //generate a random hash colour sequence
 const randomColour = () => "#"+Math.floor(Math.random()*16777215).toString(16);
 
-const collider = 
+// add or remove collision state depending on current collision status
+const checkCollisionState = (spaceshipClasslist, hasJustCollided) =>
+{
+    const collisionState = "collision-state";
+    const containsCollision = spaceshipClasslist.contains(collisionState);
+    
+    if(!containsCollision) spaceshipClasslist.add(collisionState);
+    else if(containsCollision && !hasJustCollided) spaceshipClasslist.remove(collisionState);
+}
+
+// return true if distance between current star and spaceship < their combined radius 
+const compareDistanceAndRadius = (currentStarPosition, spaceshipPosition) =>
+{    
+    const dx = currentStarPosition.left - spaceshipPosition.left;
+    const dy = currentStarPosition.top - spaceshipPosition.top;    
+    const distance = Math.sqrt(dx*dx + dy*dy);
+    const combinedRadius = currentStarPosition.radius + spaceshipPosition.radius
+
+    return distance < combinedRadius;
+}
+
+/* object storing info about spaceship and stars, contains function that loops 
+through stars to compare position of spaceship (checking for collisions) */
+const collisionObject = 
 {
     spaceship: null, starDivs: [],
     
-    // looping to compare position of spaceship with stars to check for collisions
-    checkCollision() 
+    collisionDetection() 
     {
         const starClass = document.querySelectorAll(".stars");
 
         let hasJustCollided = false;            
         for (let i = 0; i < this.starDivs.length; i++) 
         {
-            const currentStar = this.starDivs[i];
-
-            const dx = currentStar.position.left - this.spaceship.position.left;
-            const dy = currentStar.position.top - this.spaceship.position.top;
-            
-            //if distance between the current star and spaceship coordinates < their combined radius 
-            if(Math.sqrt(dx*dx + dy*dy) < currentStar.position.radius+this.spaceship.position.radius) 
+            if(compareDistanceAndRadius(this.starDivs[i].position, this.spaceship.position))
             {
                 hasJustCollided = true;
                 starClass[i].classList.add("hidden");
-
-                if(!this.spaceship.ref.classList.contains('collision-state')) 
-                {
-                    this.spaceship.ref.classList.add('collision-state');
-                }
             } 
-            else if(this.spaceship.ref.classList.contains('collision-state') && !hasJustCollided) 
-            {
-                this.spaceship.ref.classList.remove('collision-state');
-            }
+            checkCollisionState(this.spaceship.ref.classList, hasJustCollided);
         }
 
         // TODO: lengths eventually get uneven so this doesn't run forever
@@ -52,11 +60,11 @@ const createRandomStars = () =>
 
         document.querySelector('.space-container').appendChild(newStarDiv);
         newStarDiv.classList.add("collidable-object", "stars");
-        collider.starDivs.push(new BaseStar(newStarDiv));
+        collisionObject.starDivs.push(new BaseStar(newStarDiv));
     }
 }
 
-//constructing position of new star in an object in order to keep track of each one in an array
+// use this object to create instance of each new star in order to track them in array
 window.BaseStar = function(star) 
 {
     this.position = 
@@ -68,17 +76,16 @@ window.BaseStar = function(star)
 }
 
 /*
-    - .prototype allows you to add new properties/functions to object constructors
-    - receiving keyboard input and appropriately updating current position
+    - .using prototype to add new properties/functions to object constructor
+    - receiving keyboard input, updating current position, constantly checking for collisions
 */
 window.MoveSpaceship = function(ref) {this.ref = ref; BaseStar.call(this, ref);}
 MoveSpaceship.prototype.shiftPosition = function(x, y) 
 {
-    this.position.left += x; 
-    this.position.top += y;
+    this.position.left += x; this.position.top += y;
     
     this.ref.setAttribute('style', `left: ${this.position.left}px; top: ${this.position.top}px`);
-    collider.checkCollision();
+    collisionObject.collisionDetection(); 
 }
 MoveSpaceship.prototype.moveOnKeyPress = function(e) 
 {
@@ -93,21 +100,23 @@ MoveSpaceship.prototype.moveOnKeyPress = function(e)
     }
 }
 
-// setting up entire game "canvas" and listening for keyboard input on page load
+/*
+    - setting up entire game "canvas", listening for keyboard input on page load
+    - creating random stars and new spaceship, then positioning them
+*/ 
 const setup = () =>
 {
     const spaceship = document.querySelector("#spaceship");    
     if(spaceship) spaceship.remove(); //remove previous spaceship in new game
     
-    // TODO: speed/velocity needs to be reset as it gets incremently faster
-    
-    // creating random stars and new spaceship, then positioning them
     createRandomStars();
+    
     const newSpaceship = document.createElement('div');
     newSpaceship.setAttribute('style', 'left: 500px; top: 500px;');
     newSpaceship.setAttribute('id', 'spaceship');
     newSpaceship.classList.add('collidable-object');
     document.querySelector('.space-container').appendChild(newSpaceship);
-    collider.spaceship = new MoveSpaceship(newSpaceship);    
-}
-setup(); document.addEventListener('keydown', (e) => collider.spaceship.moveOnKeyPress(e));
+    collisionObject.spaceship = new MoveSpaceship(newSpaceship);    
+    
+    document.addEventListener('keydown', (e) => collisionObject.spaceship.moveOnKeyPress(e));    
+}; setup();
