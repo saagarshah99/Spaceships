@@ -6,11 +6,11 @@ const collider =
     spaceship: null, starDivs: [],
     
     // looping to compare position of spaceship with stars to check for collisions
-    // checkCollision: function() 
     checkCollision() 
     {
-        let hasJustCollided = false;            
         const starClass = document.querySelectorAll(".stars");
+
+        let hasJustCollided = false;            
         for (let i = 0; i < this.starDivs.length; i++) 
         {
             const currentStar = this.starDivs[i];
@@ -35,7 +35,7 @@ const collider =
             }
         }
 
-        // TODO: this only runs twice, length eventually gets uneven
+        // TODO: lengths eventually get uneven so this doesn't run forever
         if(starClass.length == document.querySelectorAll(".hidden").length) createRandomStars();
     },
 };
@@ -47,16 +47,17 @@ const createRandomStars = () =>
     {
         const newStarDiv = document.createElement('div');
         
-        newStarDiv.setAttribute('style', `left: ${Math.floor(Math.random() * 400)}px; top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};`);
+        newStarDiv.setAttribute('style', `left: ${Math.floor(Math.random() * 400)}px; \
+        top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};`);
 
         document.querySelector('.space-container').appendChild(newStarDiv);
         newStarDiv.classList.add("collidable-object", "stars");
-        collider.starDivs.push(new BaseDiv(newStarDiv));
+        collider.starDivs.push(new BaseStar(newStarDiv));
     }
 }
 
-// the prototype for my base div
-window.BaseDiv = function(star) 
+//constructing position of new star in an object in order to keep track of each one in an array
+window.BaseStar = function(star) 
 {
     this.position = 
     {
@@ -66,12 +67,12 @@ window.BaseDiv = function(star)
     };
 }
 
-/***
- * .prototype allows you to add new properties/functions to object constructors
- * receiving keyboard input and appropriately updating current position
- */
-window.MoveStar = function(ref) {this.ref = ref; BaseDiv.call(this, ref);}
-MoveStar.prototype.shiftPosition = function(x, y) 
+/*
+    - .prototype allows you to add new properties/functions to object constructors
+    - receiving keyboard input and appropriately updating current position
+*/
+window.MoveSpaceship = function(ref) {this.ref = ref; BaseStar.call(this, ref);}
+MoveSpaceship.prototype.shiftPosition = function(x, y) 
 {
     this.position.left += x; 
     this.position.top += y;
@@ -79,7 +80,7 @@ MoveStar.prototype.shiftPosition = function(x, y)
     this.ref.setAttribute('style', `left: ${this.position.left}px; top: ${this.position.top}px`);
     collider.checkCollision();
 }
-MoveStar.prototype.moveOnKeyPress = function(e) 
+MoveSpaceship.prototype.moveOnKeyPress = function(e) 
 {
     switch(e.code) 
     {            
@@ -107,6 +108,6 @@ const setup = () =>
     newSpaceship.setAttribute('id', 'spaceship');
     newSpaceship.classList.add('collidable-object');
     document.querySelector('.space-container').appendChild(newSpaceship);
-    collider.spaceship = new MoveStar(newSpaceship);    
+    collider.spaceship = new MoveSpaceship(newSpaceship);    
 }
 setup(); document.addEventListener('keydown', (e) => collider.spaceship.moveOnKeyPress(e));
