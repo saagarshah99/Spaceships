@@ -22,6 +22,17 @@ const compareDistanceAndRadius = (currentStarPosition, spaceshipPosition) =>
     return distance < combinedRadius;
 }
 
+// use this object to create instance of each new star in order to track them in array
+window.BaseStar = function(star) 
+{
+    this.position = 
+    {
+        left: star.getBoundingClientRect().left,
+        top: star.getBoundingClientRect().top,
+        radius: star.getBoundingClientRect().height / 2,
+    };
+}
+
 /* object storing info about spaceship and stars, contains function that loops 
 through stars to compare position of spaceship (checking for collisions) */
 const collisionObject = 
@@ -43,37 +54,9 @@ const collisionObject =
             checkCollisionState(this.spaceship.ref.classList, hasJustCollided);
         }
 
-        // TODO: lengths eventually get uneven so this doesn't run forever
         if(starClass.length == document.querySelectorAll(".hidden").length) createRandomStars();
     },
 };
-
-// generate specific amount of randomly positions stars
-const createRandomStars = () =>
-{
-    for (let i = 0; i < 1; i++) 
-    {
-        const newStarDiv = document.createElement('div');
-        
-        newStarDiv.setAttribute('style', `left: ${Math.floor(Math.random() * 400)}px; \
-        top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};`);
-
-        document.querySelector('.space-container').appendChild(newStarDiv);
-        newStarDiv.classList.add("collidable-object", "stars");
-        collisionObject.starDivs.push(new BaseStar(newStarDiv));
-    }
-}
-
-// use this object to create instance of each new star in order to track them in array
-window.BaseStar = function(star) 
-{
-    this.position = 
-    {
-        left: star.getBoundingClientRect().left,
-        top: star.getBoundingClientRect().top,
-        radius: star.getBoundingClientRect().height / 2,
-    };
-}
 
 /*
     - .using prototype to add new properties/functions to object constructor
@@ -97,6 +80,22 @@ MoveSpaceship.prototype.moveOnKeyPress = function(e)
         case "KeyD": case "ArrowRight": this.shiftPosition(5, 0); break;
         
         default: break; //ignore other keyboard input
+    }
+}
+
+// generate specific amount of randomly positions stars
+function createRandomStars()
+{
+    for (let i = 0; i < 1; i++) 
+    {
+        const newStarDiv = document.createElement('div');
+        
+        newStarDiv.setAttribute('style', `left: ${Math.floor(Math.random() * 400)}px; \
+        top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};`);
+
+        document.querySelector('.space-container').appendChild(newStarDiv);
+        newStarDiv.classList.add("collidable-object", "stars");
+        collisionObject.starDivs.push(new BaseStar(newStarDiv));
     }
 }
 
