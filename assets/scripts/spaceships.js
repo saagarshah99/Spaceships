@@ -10,7 +10,8 @@ const checkCollisionState = (spaceshipClasslist, hasJustCollided, numberOfCollis
     if(!containsCollision) spaceshipClasslist.add(collisionState);
     else if(containsCollision && !hasJustCollided) spaceshipClasslist.remove(collisionState);
 
-    const spaceshipStyle = document.getElementById("spaceship").style;
+    // increase size of spaceship upon collision
+    // const spaceshipStyle = document.getElementById("spaceship").style;
     // spaceshipStyle.padding = numberOfCollisions+"px";
     // spaceshipStyle.opacity = "0.5";
 }
@@ -132,7 +133,8 @@ const setup = () =>
     newSpaceship.setAttribute("style", "left: 500px; top: 500px;");
     newSpaceship.setAttribute("id", "spaceship");
     newSpaceship.classList.add("collidable-object");
-    newSpaceship.innerHTML = `<img src="./assets/images/spaceship.svg" width="50" height="50" />`;
+    // newSpaceship.innerHTML = `<img src="./assets/images/spaceship.svg" width="50" height="50" />`;
+    newSpaceship.innerHTML = `<img src="./assets/images/alien_icon.png" width="50" height="50" />`;
     
     document.querySelector(".space-container").appendChild(newSpaceship);
     collisionObject.spaceship = new MoveSpaceship(newSpaceship);    
@@ -145,6 +147,5 @@ document.querySelector("#btnConfigGame").addEventListener("click", (event) =>
 {
     event.preventDefault();
     document.querySelectorAll(".stars").forEach((star) => star.classList.add("hidden"));
-    createRandomStars();
-    document.hasFocus();
+    createRandomStars();    
 });

@@ -24,16 +24,12 @@ main {
 .space-container .collidable-object {
   margin: 0 auto;
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
   display: inline-block;
   position: absolute;
   border: 5px solid black;
 }
 .space-container #spaceship {
   background-color: #01bcf5;
-  height: 20px;
-  width: 20px;
   left: 50%;
   top: 50%;
 }
