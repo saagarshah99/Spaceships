@@ -1,8 +1,13 @@
-//generate a random hash colour sequence
+// generate random numbers for colour hashes and positions between 0 and 100 for random positioning
 const randomColour = () => "#"+Math.floor(Math.random()*16777215).toString(16);
-
-// generate number between 0 and 100 for random positioning
 const randomPosition = () => Math.floor(Math.random() * 80);
+const randomSpawnPoint = () => Math.floor(Math.random() * 50) + 30+"%";
+
+//prevent non-numeric input from even occuring
+const numbersOnly = (event) =>
+{	
+	if(!(/[0-9 .]/.test(String.fromCharCode(event.which)))) event.preventDefault();
+}
 
 // return true if distance between current star and spaceship < their combined radius 
 const compareDistanceAndRadius = (currentStarPosition, spaceshipPosition) =>
@@ -47,11 +52,6 @@ const collisionObject =
                 starClass[i].classList.add("hidden");
                 this.numberOfCollisions++;
                 document.getElementById("scoreboard").innerHTML = "Score: "+this.numberOfCollisions;
-
-                // increase size of spaceship upon collision
-                // const spaceshipStyle = document.getElementById("spaceship").style;
-                // spaceshipStyle.padding = this.numberOfCollisions+"px";
-                // spaceshipStyle.opacity = "0.5";
             } 
         }
 
@@ -96,11 +96,6 @@ function createRandomStars(event)
     {
         const newStarDiv = document.createElement("div");
         
-        // newStarDiv.setAttribute("style", `left: ${Math.floor(Math.random() * 400)}px; \
-        // top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};
-        // right: ${Math.floor(Math.random() * 400)}px; bottom: ${Math.floor(Math.random() * 600)}px;`);
-        
-        
         newStarDiv.setAttribute("style", `top: ${randomPosition()}vh; \
         right: ${randomPosition()}vw; bottom: ${randomPosition()}vh; \
         left: ${randomPosition()}vw;  background-color: ${randomColour()};`);
@@ -125,14 +120,11 @@ const setup = () =>
     if(spaceship) spaceship.remove(); //remove previous spaceship in new game
     
     createRandomStars();
-
-    let randomSpawnPoint = Math.floor(Math.random() * 50) + 30+"%";
     
     const newSpaceship = document.createElement("div");
-    newSpaceship.setAttribute("style", `left: ${randomSpawnPoint}; top: ${randomSpawnPoint};`);
+    newSpaceship.setAttribute("style", `left: ${randomSpawnPoint()}; top: ${randomSpawnPoint()};`);
     newSpaceship.setAttribute("id", "spaceship");
     newSpaceship.classList.add("collidable-object");
-    // newSpaceship.innerHTML = `<img src="./assets/images/spaceship.svg" width="50" height="50" />`;
     newSpaceship.innerHTML = `<img src="./assets/images/alien_icon.png" width="50" height="50" />`;
     
     document.querySelector(".space-container").appendChild(newSpaceship);
@@ -149,11 +141,3 @@ document.querySelector("#btnConfigGame").addEventListener("click", (event) =>
     createRandomStars();    
 });
 
-//prevent non-numeric input from even occuring
-function numbersOnly(myEvent)
-{	
-	if(!(/[0-9 .]/.test(String.fromCharCode(myEvent.which))))
-	{
-		myEvent.preventDefault();
-	}
-}
