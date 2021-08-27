@@ -1,3 +1,5 @@
+// TODO: change single quotations to doubles
+
 //generate a random hash colour sequence
 const randomColour = () => "#"+Math.floor(Math.random()*16777215).toString(16);
 
@@ -65,9 +67,10 @@ const collisionObject =
 window.MoveSpaceship = function(ref) {this.ref = ref; BaseStar.call(this, ref);}
 MoveSpaceship.prototype.shiftPosition = function(x, y) 
 {
-    this.position.left += x; this.position.top += y;
+    this.position.left += x; 
+    this.position.top += y;
     
-    this.ref.setAttribute('style', `left: ${this.position.left}px; top: ${this.position.top}px`);
+    this.ref.setAttribute("style", `left: ${this.position.left}px; top: ${this.position.top}px`);
     collisionObject.collisionDetection(); 
 }
 MoveSpaceship.prototype.moveOnKeyPress = function(e) 
@@ -84,16 +87,21 @@ MoveSpaceship.prototype.moveOnKeyPress = function(e)
 }
 
 // generate specific amount of randomly positions stars
-function createRandomStars()
+function createRandomStars(event)
 {
-    for (let i = 0; i < 1; i++) 
+    // document.querySelector("#frmGameConfig").preventDefault();
+    let numberOfStars =  document.querySelector("#txtNumberOfStars").value;
+    if(!numberOfStars) numberOfStars = 10;
+    
+    for (let i = 0; i < numberOfStars; i++) 
     {
-        const newStarDiv = document.createElement('div');
+        const newStarDiv = document.createElement("div");
         
-        newStarDiv.setAttribute('style', `left: ${Math.floor(Math.random() * 400)}px; \
-        top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};`);
+        newStarDiv.setAttribute("style", `left: ${Math.floor(Math.random() * 400)}px; \
+        top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};
+        right: ${Math.floor(Math.random() * 400)}px; bottom: ${Math.floor(Math.random() * 600)}px;`);
 
-        document.querySelector('.space-container').appendChild(newStarDiv);
+        document.querySelector(".space-container").appendChild(newStarDiv);
         newStarDiv.classList.add("collidable-object", "stars");
         collisionObject.starDivs.push(new BaseStar(newStarDiv));
     }
@@ -110,12 +118,20 @@ const setup = () =>
     
     createRandomStars();
     
-    const newSpaceship = document.createElement('div');
-    newSpaceship.setAttribute('style', 'left: 500px; top: 500px;');
-    newSpaceship.setAttribute('id', 'spaceship');
-    newSpaceship.classList.add('collidable-object');
-    document.querySelector('.space-container').appendChild(newSpaceship);
+    const newSpaceship = document.createElement("div");
+    newSpaceship.setAttribute("style", "left: 500px; top: 500px;");
+    newSpaceship.setAttribute("id", "spaceship");
+    newSpaceship.classList.add("collidable-object");
+    document.querySelector(".space-container").appendChild(newSpaceship);
     collisionObject.spaceship = new MoveSpaceship(newSpaceship);    
     
-    document.addEventListener('keydown', (e) => collisionObject.spaceship.moveOnKeyPress(e));    
+    document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyPress(e));    
 }; setup();
+
+// hide all current stars and call function randomly generate/update number of stars 
+document.querySelector("#btnConfigGame").addEventListener("click", (event) => 
+{
+    event.preventDefault();
+    document.querySelectorAll(".stars").forEach((star) => star.classList.add("hidden"));
+    createRandomStars()
+});
