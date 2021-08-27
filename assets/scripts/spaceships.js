@@ -10,7 +10,7 @@ const checkCollisionState = (spaceshipClasslist, hasJustCollided, numberOfCollis
     if(!containsCollision) spaceshipClasslist.add(collisionState);
     else if(containsCollision && !hasJustCollided) spaceshipClasslist.remove(collisionState);
 
-    // const spaceshipStyle = document.getElementById("spaceship").style;
+    const spaceshipStyle = document.getElementById("spaceship").style;
     // spaceshipStyle.padding = numberOfCollisions+"px";
     // spaceshipStyle.opacity = "0.5";
 }
@@ -106,6 +106,10 @@ function createRandomStars(event)
         newStarDiv.setAttribute("style", `left: ${Math.floor(Math.random() * 400)}px; \
         top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};
         right: ${Math.floor(Math.random() * 400)}px; bottom: ${Math.floor(Math.random() * 600)}px;`);
+        
+        const randomSize = Math.floor(Math.random() * 80) + 30+"px";
+        newStarDiv.style.width = randomSize;
+        newStarDiv.style.height = randomSize;
 
         document.querySelector(".space-container").appendChild(newStarDiv);
         newStarDiv.classList.add("collidable-object", "stars");
@@ -130,9 +134,6 @@ const setup = () =>
     newSpaceship.classList.add("collidable-object");
     newSpaceship.innerHTML = `<img src="./assets/images/spaceship.svg" width="50" height="50" />`;
     
-    // newSpaceship.style.padding = "0";
-    // newSpaceship.style.opacity = "1";
-
     document.querySelector(".space-container").appendChild(newSpaceship);
     collisionObject.spaceship = new MoveSpaceship(newSpaceship);    
     
