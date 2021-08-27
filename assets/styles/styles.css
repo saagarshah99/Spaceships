@@ -1,24 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .space-container {
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  height: 98vh;
+  background-color: #464242;
+  width: 80vw;
+  height: 80vh;
 }
 .space-container .collidable-object {
+  margin: 0 auto;
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
   display: inline-block;
   position: absolute;
+  border: 5px solid black;
 }
 .space-container #spaceship {
   background-color: #01bcf5;
-  height: 20px;
-  width: 20px;
-  left: 50%;
-  top: 50%;
 }
 .space-container .hidden {
   display: none;
+}
+
+#frmGameConfig {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 5px;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 460px) {
+  #frmGameConfig {
+    margin: 10px;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+  }
 }

@@ -1,3 +1,8 @@
+<!-- TODO:  
+    * Refactor code - BEM, pure functions, spacing/indenting
+    * Fixed responsiveness
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +11,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spaceships</title>
     <link rel="stylesheet" href="./assets/styles/styles.css">
+    <link rel="shortcut icon" href="./assets/images/alien_icon.png" type="image/x-icon">
 </head>
-<body>
-    <div class='space-container'></div>
+<body>    
+    <main>
+        <div class='space-container'></div>    
+        <div>
+            <form id="frmGameConfig">
+                <label for="txtNumberOfStars">Number of Planets</label>
+                <input type="number" name="" id="txtNumberOfStars" />
+                <input type="submit" value="Update" id="btnConfigGame" />
+            </form>
+        </div>
+        <span id="scoreboard"></span>
+    </main>
+
 
     <script src="./assets/scripts/spaceships.js"></script>
 </body>
