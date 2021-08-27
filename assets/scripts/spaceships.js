@@ -1,16 +1,18 @@
-// TODO: change single quotations to doubles
-
 //generate a random hash colour sequence
 const randomColour = () => "#"+Math.floor(Math.random()*16777215).toString(16);
 
 // add or remove collision state depending on current collision status
-const checkCollisionState = (spaceshipClasslist, hasJustCollided) =>
+const checkCollisionState = (spaceshipClasslist, hasJustCollided, numberOfCollisions) =>
 {
     const collisionState = "collision-state";
     const containsCollision = spaceshipClasslist.contains(collisionState);
     
     if(!containsCollision) spaceshipClasslist.add(collisionState);
     else if(containsCollision && !hasJustCollided) spaceshipClasslist.remove(collisionState);
+
+    // const spaceshipStyle = document.getElementById("spaceship").style;
+    // spaceshipStyle.padding = numberOfCollisions+"px";
+    // spaceshipStyle.opacity = "0.5";
 }
 
 // return true if distance between current star and spaceship < their combined radius 
@@ -39,21 +41,25 @@ window.BaseStar = function(star)
 through stars to compare position of spaceship (checking for collisions) */
 const collisionObject = 
 {
-    spaceship: null, starDivs: [],
+    spaceship: null, 
+    starDivs: [],
+    numberOfCollisions: 0,
     
     collisionDetection() 
     {
         const starClass = document.querySelectorAll(".stars");
 
-        let hasJustCollided = false;            
+        let hasJustCollided = false;
         for (let i = 0; i < this.starDivs.length; i++) 
         {
             if(compareDistanceAndRadius(this.starDivs[i].position, this.spaceship.position))
             {
                 hasJustCollided = true;
                 starClass[i].classList.add("hidden");
+                
+                if(this.numberOfCollisions < 80) this.numberOfCollisions++;
             } 
-            checkCollisionState(this.spaceship.ref.classList, hasJustCollided);
+            checkCollisionState(this.spaceship.ref.classList, hasJustCollided, this.numberOfCollisions);
         }
 
         if(starClass.length == document.querySelectorAll(".hidden").length) createRandomStars();
@@ -122,6 +128,11 @@ const setup = () =>
     newSpaceship.setAttribute("style", "left: 500px; top: 500px;");
     newSpaceship.setAttribute("id", "spaceship");
     newSpaceship.classList.add("collidable-object");
+    newSpaceship.innerHTML = `<img src="./assets/images/spaceship.svg" width="50" height="50" />`;
+    
+    // newSpaceship.style.padding = "0";
+    // newSpaceship.style.opacity = "1";
+
     document.querySelector(".space-container").appendChild(newSpaceship);
     collisionObject.spaceship = new MoveSpaceship(newSpaceship);    
     
