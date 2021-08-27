@@ -57,8 +57,8 @@ const collisionObject =
             {
                 hasJustCollided = true;
                 starClass[i].classList.add("hidden");
-                
-                if(this.numberOfCollisions < 80) this.numberOfCollisions++;
+                this.numberOfCollisions++;
+                document.getElementById("scoreboard").innerHTML = "Score: "+this.numberOfCollisions;
             } 
             checkCollisionState(this.spaceship.ref.classList, hasJustCollided, this.numberOfCollisions);
         }
@@ -128,9 +128,11 @@ const setup = () =>
     if(spaceship) spaceship.remove(); //remove previous spaceship in new game
     
     createRandomStars();
+
+    let randomSpawnPoint = Math.floor(Math.random() * 50) + 30+"%";
     
     const newSpaceship = document.createElement("div");
-    newSpaceship.setAttribute("style", "left: 500px; top: 500px;");
+    newSpaceship.setAttribute("style", `left: ${randomSpawnPoint}; top: ${randomSpawnPoint};`);
     newSpaceship.setAttribute("id", "spaceship");
     newSpaceship.classList.add("collidable-object");
     // newSpaceship.innerHTML = `<img src="./assets/images/spaceship.svg" width="50" height="50" />`;

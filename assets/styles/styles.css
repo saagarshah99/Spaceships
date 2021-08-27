@@ -30,8 +30,6 @@ main {
 }
 .space-container #spaceship {
   background-color: #01bcf5;
-  left: 50%;
-  top: 50%;
 }
 .space-container .hidden {
   display: none;
