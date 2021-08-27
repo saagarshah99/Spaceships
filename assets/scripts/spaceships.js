@@ -90,10 +90,10 @@ MoveSpaceship.prototype.moveOnKeyPress = function(e)
 function createRandomStars(event)
 {
     // document.querySelector("#frmGameConfig").preventDefault();
-    let numberOfStars =  document.querySelector("#txtNumberOfStars").value;
-    if(!numberOfStars) numberOfStars = 10;
+    let numberOfStars =  document.querySelector("#txtNumberOfStars");
+    if(!numberOfStars.value) numberOfStars.value = 10
     
-    for (let i = 0; i < numberOfStars; i++) 
+    for (let i = 0; i < numberOfStars.value; i++) 
     {
         const newStarDiv = document.createElement("div");
         
@@ -133,5 +133,6 @@ document.querySelector("#btnConfigGame").addEventListener("click", (event) =>
 {
     event.preventDefault();
     document.querySelectorAll(".stars").forEach((star) => star.classList.add("hidden"));
-    createRandomStars()
+    createRandomStars();
+    document.hasFocus();
 });
