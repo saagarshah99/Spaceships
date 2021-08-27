@@ -1,20 +1,8 @@
 //generate a random hash colour sequence
 const randomColour = () => "#"+Math.floor(Math.random()*16777215).toString(16);
 
-// add or remove collision state depending on current collision status
-const checkCollisionState = (spaceshipClasslist, hasJustCollided, numberOfCollisions) =>
-{
-    const collisionState = "collision-state";
-    const containsCollision = spaceshipClasslist.contains(collisionState);
-    
-    if(!containsCollision) spaceshipClasslist.add(collisionState);
-    else if(containsCollision && !hasJustCollided) spaceshipClasslist.remove(collisionState);
-
-    // increase size of spaceship upon collision
-    // const spaceshipStyle = document.getElementById("spaceship").style;
-    // spaceshipStyle.padding = numberOfCollisions+"px";
-    // spaceshipStyle.opacity = "0.5";
-}
+// generate number between 0 and 100 for random positioning
+const randomPosition = () => Math.floor(Math.random() * 80);
 
 // return true if distance between current star and spaceship < their combined radius 
 const compareDistanceAndRadius = (currentStarPosition, spaceshipPosition) =>
@@ -59,8 +47,12 @@ const collisionObject =
                 starClass[i].classList.add("hidden");
                 this.numberOfCollisions++;
                 document.getElementById("scoreboard").innerHTML = "Score: "+this.numberOfCollisions;
+
+                // increase size of spaceship upon collision
+                // const spaceshipStyle = document.getElementById("spaceship").style;
+                // spaceshipStyle.padding = this.numberOfCollisions+"px";
+                // spaceshipStyle.opacity = "0.5";
             } 
-            checkCollisionState(this.spaceship.ref.classList, hasJustCollided, this.numberOfCollisions);
         }
 
         if(starClass.length == document.querySelectorAll(".hidden").length) createRandomStars();
@@ -98,15 +90,20 @@ function createRandomStars(event)
 {
     // document.querySelector("#frmGameConfig").preventDefault();
     let numberOfStars =  document.querySelector("#txtNumberOfStars");
-    if(!numberOfStars.value) numberOfStars.value = 10
+    if(!numberOfStars.value) numberOfStars.value = 10;
     
     for (let i = 0; i < numberOfStars.value; i++) 
     {
         const newStarDiv = document.createElement("div");
         
-        newStarDiv.setAttribute("style", `left: ${Math.floor(Math.random() * 400)}px; \
-        top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};
-        right: ${Math.floor(Math.random() * 400)}px; bottom: ${Math.floor(Math.random() * 600)}px;`);
+        // newStarDiv.setAttribute("style", `left: ${Math.floor(Math.random() * 400)}px; \
+        // top: ${Math.floor(Math.random() * 600)}px; background-color: ${randomColour()};
+        // right: ${Math.floor(Math.random() * 400)}px; bottom: ${Math.floor(Math.random() * 600)}px;`);
+        
+        
+        newStarDiv.setAttribute("style", `top: ${randomPosition()}vh; \
+        right: ${randomPosition()}vw; bottom: ${randomPosition()}vh; \
+        left: ${randomPosition()}vw;  background-color: ${randomColour()};`);
         
         const randomSize = Math.floor(Math.random() * 80) + 30+"px";
         newStarDiv.style.width = randomSize;
@@ -151,3 +148,12 @@ document.querySelector("#btnConfigGame").addEventListener("click", (event) =>
     document.querySelectorAll(".stars").forEach((star) => star.classList.add("hidden"));
     createRandomStars();    
 });
+
+//prevent non-numeric input from even occuring
+function numbersOnly(myEvent)
+{	
+	if(!(/[0-9 .]/.test(String.fromCharCode(myEvent.which))))
+	{
+		myEvent.preventDefault();
+	}
+}
