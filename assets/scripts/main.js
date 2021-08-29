@@ -15,7 +15,7 @@ const createRandomStars = (txtNumberOfStars) => {
 
         document.querySelector(".space").appendChild(newStarDiv);
         newStarDiv.classList.add("space__collidable-object", "space__stars");
-        collisionObject.starDivs.push(new BaseStar(newStarDiv));
+        collisionObject.stars.push(new BaseStar(newStarDiv));
     }
 }
 
