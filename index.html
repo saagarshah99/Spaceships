@@ -14,18 +14,17 @@
     <link rel="shortcut icon" href="./assets/images/alien_icon.png" type="image/x-icon">
 </head>
 <body>    
-    <main>
-        <div class='space-container'></div>    
-        <div>
+    <div class='space'>
+        <div id="spaceship"></div>
+        <section>
             <form id="frmGameConfig">
-                <label for="txtNumberOfStars">Number of Planets</label>
+                <label for="txtNumberOfStars">Number of Planets & Stars</label>
                 <input type="number" name="" id="txtNumberOfStars" onkeypress="numbersOnly(event)" />
                 <input type="submit" value="Update" id="btnConfigGame" />
             </form>
-        </div>
-        <span id="scoreboard"></span>
-    </main>
-
+            <span id="scoreboard"></span>
+        </section>
+    </div>
 
     <script src="./assets/scripts/spaceships.js"></script>
 </body>

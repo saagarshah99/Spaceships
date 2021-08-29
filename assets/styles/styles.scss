@@ -1,3 +1,5 @@
+/***************************GENERIC PAGE STYLES*************************/
+
 *
 {
     padding: 0;
@@ -5,23 +7,19 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
-
 body
 {
     background-color: rgb(70, 66, 66);
-    color: white;    
-}
-
-main
-{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    color: white;
     font-weight: bold;
 }
 
-.space-container
+
+
+/***************************MAIN GAME STYLES*************************/
+
+// positioning different sections of the game screen
+.space
 {
     gap: 100px;
     margin: 0 auto;
@@ -29,7 +27,8 @@ main
     justify-content: center;
     align-items: center;
 
-    .collidable-object 
+    // generic styles for both spaceship and planets/stars
+    &__collidable-object 
     {
         margin: 0 auto;
         border-radius: 50%;
@@ -38,29 +37,49 @@ main
         border: 5px solid rgb(0, 0, 0);
         z-index: -1;
     }
+    &__hidden {display: none;}
     
     #spaceship {background-color: rgb(1, 188, 245);}
 
-    .hidden {display: none;}
+    // styles for section containing update # of planets/stars form and scoreboard
+    section
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        #frmGameConfig
+        {
+            display: flex;
+            margin: 5px;
+            gap: 10px;
+            z-index: 4;
+        }
+    }
+    
 }
 
-#frmGameConfig
-{
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    margin: 5px;
-    gap: 10px;
-    z-index: 4;
-}
+
+
+
+
+/***************************RESPONSIVE DESIGN*************************/
 
 @media only screen and (max-width: 460px) 
 {
-    #frmGameConfig
+    .space
     {
-        margin: 10px;
-        flex-direction: column;
-        margin: 0 auto;
-        align-items: center;
+        section
+        {
+            flex-direction: column;
+
+            #frmGameConfig
+            {
+                margin: 10px;
+                flex-direction: column;
+                margin: 0 auto;
+                align-items: center;
+            }
+        }
     }
 }
