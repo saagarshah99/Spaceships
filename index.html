@@ -14,8 +14,10 @@
     <div class="space flexbox">        
         <section class="space__config flexbox">
             <form class="space__config__form" class="flexbox">
-                <label>Number of Planets & Stars</label>
-                <input type="number" class="space__config__input-stars" onkeypress="numbersOnly(event)" />
+                <section>
+                    <label>Number of Planets & Stars: </label>
+                    <input type="number" class="space__config__input-stars" onkeypress="numbersOnly(event)" />
+                </section>
                 <input type="submit" value="Update" class="space__config__btn" />
             </form>
             <span class="space__config__scoreboard"></span>

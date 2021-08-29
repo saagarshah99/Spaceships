@@ -1,6 +1,6 @@
 // handling keyboard input to update current position at a given speed
 MoveSpaceship.prototype.moveOnKeyPress = function(event) {
-    const speed = 10;
+    const speed = 15;
     
     switch(event.code) {
         case "KeyW": case "ArrowUp": this.shiftPosition(0, speed*-1); break;

@@ -36,7 +36,7 @@ const main = () => {
     document.querySelector(".space").appendChild(spaceship);
     collisionObject.spaceship = new MoveSpaceship(spaceship);
     
-    document.querySelector(".space__config__scoreboard") = getScore();
+    document.querySelector(".space__config__scoreboard").innerHTML = getScore();
     
     document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyPress(e));    
 }; 
