@@ -1,3 +1,4 @@
+/***************************GENERIC PAGE STYLES*************************/
 * {
   padding: 0;
   margin: 0;
@@ -8,52 +9,5 @@
 body {
   background-color: #464242;
   color: white;
-}
-
-main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   font-weight: bold;
-}
-
-.space-container {
-  gap: 100px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.space-container .collidable-object {
-  margin: 0 auto;
-  border-radius: 50%;
-  display: inline-block;
-  position: absolute;
-  border: 5px solid black;
-  z-index: -1;
-}
-.space-container #spaceship {
-  background-color: #01bcf5;
-}
-.space-container .hidden {
-  display: none;
-}
-
-#frmGameConfig {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  margin: 5px;
-  gap: 10px;
-  z-index: 4;
-}
-
-@media only screen and (max-width: 460px) {
-  #frmGameConfig {
-    margin: 10px;
-    flex-direction: column;
-    margin: 0 auto;
-    align-items: center;
-  }
 }

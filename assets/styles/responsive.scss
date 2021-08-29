@@ -1,0 +1,17 @@
+/***************************RESPONSIVE DESIGN*************************/
+
+@media only screen and (max-width: 460px) 
+{
+    .space {
+        section {
+            flex-direction: column;
+
+            #frmGameConfig {
+                margin: 10px;
+                flex-direction: column;
+                margin: 0 auto;
+                align-items: center;
+            }
+        }
+    }
+}

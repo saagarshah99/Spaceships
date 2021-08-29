@@ -1,66 +1,14 @@
-*
-{
+/***************************GENERIC PAGE STYLES*************************/
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body
-{
+body {
     background-color: rgb(70, 66, 66);
-    color: white;    
-}
-
-main
-{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    color: white;
     font-weight: bold;
-}
-
-.space-container
-{
-    gap: 100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .collidable-object 
-    {
-        margin: 0 auto;
-        border-radius: 50%;
-        display: inline-block;
-        position: absolute;
-        border: 5px solid rgb(0, 0, 0);
-        z-index: -1;
-    }
-    
-    #spaceship {background-color: rgb(1, 188, 245);}
-
-    .hidden {display: none;}
-}
-
-#frmGameConfig
-{
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    margin: 5px;
-    gap: 10px;
-    z-index: 4;
-}
-
-@media only screen and (max-width: 460px) 
-{
-    #frmGameConfig
-    {
-        margin: 10px;
-        flex-direction: column;
-        margin: 0 auto;
-        align-items: center;
-    }
 }
