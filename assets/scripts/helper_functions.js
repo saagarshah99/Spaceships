@@ -1,17 +1,24 @@
+// return random number of given range
+const random = (min, max) => Math.floor(Math.random() * max) + min;
+
 /* 
-    - generate random numbers for colour hashes and positions between 0 and 100 for random positioning
+    - generate random colour hashes (base 16), positions/spawn points and sizes of sprites
     - positions calculated specifically for the screen we're currently viewing the game on
 */
-const randomColour = () => "#"+Math.floor(Math.random()*16777215).toString(16);
+const randomColour = () => "#"+random(0, 16777215).toString(16);
+const randomPosition = (unit) => random(0, 80)+unit;
+const randomSpawnPoint = () => random(30, 50)+"%";
+const randomSize = () => random(30, 80)+"px";
 
-const randomPosition = (unit) => Math.floor(Math.random() * 80)+unit;
-
-const randomSpawnPoint = () => Math.floor(Math.random() * 50) + 30+"%";
-
-const randomSize = () => Math.floor(Math.random() * 80) + 30+"px";
-
+// update scoreboard when invoked
+const getScore = () => "Score: "+collisionObject.numberOfCollisions;
 
 //prevent non-numeric input from even occuring
 const numbersOnly = (event) => {
-	if(!(/[0-9 .]/.test(String.fromCharCode(event.which)))) event.preventDefault();
+	const inputText = String.fromCharCode(event.which);
+
+    if(!(/[0-9 .]/.test(inputText))) 
+    {
+        event.preventDefault()
+    };
 }

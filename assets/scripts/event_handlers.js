@@ -1,6 +1,6 @@
 // handling keyboard input to update current position at a given speed
 MoveSpaceship.prototype.moveOnKeyPress = function(event) {
-    const speed = 20;
+    const speed = 15;
     
     switch(event.code) {
         case "KeyW": case "ArrowUp": this.shiftPosition(0, speed*-1); break;
@@ -16,12 +16,10 @@ MoveSpaceship.prototype.moveOnKeyPress = function(event) {
 }
 
 // hide all current stars and call function randomly generate/update number of stars 
-document.querySelector("#btnConfigGame").addEventListener("click", (event) => {
+document.querySelector(".space__config__btn").addEventListener("click", (event) => {
     event.preventDefault();
     
-    document.querySelectorAll(".space__stars").forEach((star) => {
-        star.classList.add("space__hidden")
-    });
+    document.querySelectorAll(".space__stars").forEach((star) => star.classList.add("space__hidden"));
     
-    createRandomStars(document.querySelector("#txtNumberOfStars"));    
+    createRandomStars(document.querySelector(".space__config__input-stars"));    
 });

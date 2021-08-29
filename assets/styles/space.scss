@@ -4,7 +4,6 @@
 .space {
     gap: 100px;
     margin: 0 auto;
-    display: flex;
     justify-content: center;
     align-items: center;
 
@@ -14,24 +13,29 @@
         border-radius: 50%;
         display: inline-block;
         position: absolute;
-        border: 5px solid rgb(0, 0, 0);
+        border: 5px solid black;
         z-index: -1;
     }
     &__hidden {display: none;}
-    
-    #spaceship {background-color: rgb(1, 188, 245);}
+
+    #spaceship
+    {
+        display: flex;
+        width: 60px;
+        height: 60px;
+        align-items: center;
+        justify-items: center;
+        
+        img {margin: 0 auto;}
+    }
 
     // styles for section containing update # of planets/stars form and scoreboard
-    section {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        #frmGameConfig {
-            display: flex;
-            margin: 5px;
-            gap: 10px;
+    .space__config {
+        margin: 2vw;
+        
+        &__form {
             z-index: 4;
+            gap: 10px;
         }
     }
 }

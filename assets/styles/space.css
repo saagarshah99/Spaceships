@@ -2,7 +2,6 @@
 .space {
   gap: 100px;
   margin: 0 auto;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -18,16 +17,19 @@
   display: none;
 }
 .space #spaceship {
-  background-color: #01bcf5;
-}
-.space section {
   display: flex;
+  width: 60px;
+  height: 60px;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
 }
-.space section #frmGameConfig {
-  display: flex;
-  margin: 5px;
-  gap: 10px;
+.space #spaceship img {
+  margin: 0 auto;
+}
+.space .space__config {
+  margin: 2vw;
+}
+.space .space__config__form {
   z-index: 4;
+  gap: 10px;
 }

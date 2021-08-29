@@ -3,10 +3,10 @@
 @media only screen and (max-width: 460px) 
 {
     .space {
-        section {
+        .space__config {
             flex-direction: column;
-
-            #frmGameConfig {
+            
+            &__form {
                 margin: 10px;
                 flex-direction: column;
                 margin: 0 auto;

@@ -11,18 +11,20 @@
     <link rel="shortcut icon" href="./assets/images/alien_icon.png" type="image/x-icon">
 </head>
 <body>    
-    <div class='space'>
+    <div class="space flexbox">        
+        <section class="space__config flexbox">
+            <form class="space__config__form" class="flexbox">
+                <section>
+                    <label>Number of Planets & Stars: </label>
+                    <input type="number" class="space__config__input-stars" onkeypress="numbersOnly(event)" />
+                    <input type="submit" value="Update" class="space__config__btn" />
+                </section>
+            </form>
+            <span class="space__config__scoreboard"></span>
+        </section>
         <div id="spaceship" class="space__collidable-object">
             <img src="./assets/images/alien_icon.png" width="50" height="50" />
         </div>
-        <section>
-            <form id="frmGameConfig">
-                <label for="txtNumberOfStars">Number of Planets & Stars</label>
-                <input type="number" name="" id="txtNumberOfStars" onkeypress="numbersOnly(event)" />
-                <input type="submit" value="Update" id="btnConfigGame" />
-            </form>
-            <span id="scoreboard"></span>
-        </section>
     </div>
 
     <script src="./assets/scripts/helper_functions.js"></script>
