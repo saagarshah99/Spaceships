@@ -16,6 +16,19 @@ const createRandomStars = (txtNumberOfStars) => {
         document.querySelector(".space").appendChild(newStarDiv);
         newStarDiv.classList.add("space__collidable-object", "space__stars");
         collisionObject.stars.push(new BaseStar(newStarDiv));
+
+        // listening to taps/mouse clicks (collision), hide star and move spaceship to that position
+        newStarDiv.addEventListener("click", (event) => {
+            const spaceship = document.querySelector("#spaceship");
+            
+            spaceship.style.top = newStarDiv.style.top;
+            spaceship.style.bottom = newStarDiv.style.bottom;
+            spaceship.style.left = newStarDiv.style.left;
+            spaceship.style.right = newStarDiv.style.right;
+
+            newStarDiv.classList.add("space__hidden");
+            collisionObject.collisionDetection();
+        });
     }
 }
 

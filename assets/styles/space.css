@@ -16,6 +16,16 @@
 .space__hidden {
   display: none;
 }
+.space #spaceship {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  align-items: center;
+  justify-items: center;
+}
+.space #spaceship img {
+  margin: 0 auto;
+}
 .space .space__config {
   margin: 2vw;
 }
