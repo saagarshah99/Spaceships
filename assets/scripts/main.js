@@ -22,18 +22,22 @@ const createRandomStars = (txtNumberOfStars) => {
 /*
     - setting up entire game "canvas", listening for keyboard input on page load
     - creating random stars and new spaceship, then positioning them
+    - initialising scoreboard
 */ 
-const setup = () => {
-    createRandomStars(document.querySelector("#txtNumberOfStars"));
+const main = () => {
+    createRandomStars(document.querySelector(".space__config__input-stars"));
     
     const spaceship = document.querySelector("#spaceship");    
 
     spaceship.style.left = randomSpawnPoint();
     spaceship.style.top = randomSpawnPoint();
+    spaceship.style.backgroundColor = "#00d4ff";
 
     document.querySelector(".space").appendChild(spaceship);
-    collisionObject.spaceship = new MoveSpaceship(spaceship);    
+    collisionObject.spaceship = new MoveSpaceship(spaceship);
+    
+    document.querySelector(".space__config__scoreboard") = getScore();
     
     document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyPress(e));    
 }; 
-setup();
+main();

@@ -10,6 +10,9 @@ const randomPosition = (unit) => random(0, 80)+unit;
 const randomSpawnPoint = () => random(30, 50)+"%";
 const randomSize = () => random(30, 80)+"px";
 
+// update scoreboard when invoked
+const getScore = () => "Score: "+collisionObject.numberOfCollisions;
+
 //prevent non-numeric input from even occuring
 const numbersOnly = (event) => {
 	const inputText = String.fromCharCode(event.which);

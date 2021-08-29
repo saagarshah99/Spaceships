@@ -1,9 +1,9 @@
 /***************************RESPONSIVE DESIGN*************************/
 @media only screen and (max-width: 460px) {
-  .space section {
+  .space .space__config {
     flex-direction: column;
   }
-  .space section #frmGameConfig {
+  .space .space__config__form {
     margin: 10px;
     flex-direction: column;
     margin: 0 auto;
