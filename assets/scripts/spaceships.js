@@ -19,12 +19,11 @@ const collisionObject = {
     collisionDetection() 
     {
         const starClass = document.querySelectorAll(".space__stars");
-        const scoreboard = document.querySelector("#scoreboard");
 
         for (let i = 0; i < this.stars.length; i++) {            
             if(compareDistanceAndRadius(this.stars[i].position, this.spaceship.position)) {                
                 starClass[i].classList.add("space__hidden");
-                scoreboard.innerHTML = "Score: "+this.numberOfCollisions++;
+                document.querySelector("#scoreboard").innerHTML = "Score: "+this.numberOfCollisions++;
             }
         }
 
