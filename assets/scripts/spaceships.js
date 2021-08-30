@@ -30,7 +30,7 @@ const collisionObject = {
 
         // generate new stars/planets when current set runs out
         if(starClass.length == document.querySelectorAll(".space__hidden").length) {
-            createRandomStars(document.querySelector(".space__config__input-stars"));
+            createRandomStars(document.querySelector(".space__config__txtStars"));
         }
     },
 };

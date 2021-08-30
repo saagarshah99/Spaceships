@@ -38,7 +38,7 @@ const createRandomStars = (txtNumberOfStars) => {
     - initialising scoreboard
 */ 
 const main = () => {
-    createRandomStars(document.querySelector(".space__config__input-stars"));
+    createRandomStars(document.querySelector(".space__config__txtStars"));
     
     const spaceship = document.querySelector("#spaceship");    
 

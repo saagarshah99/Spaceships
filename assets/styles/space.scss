@@ -33,9 +33,6 @@
     .space__config {
         margin: 2vw;
         
-        &__form {
-            z-index: 4;
-            gap: 10px;
-        }
+        &__form {z-index: 4;}
     }
 }

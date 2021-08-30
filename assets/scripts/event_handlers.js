@@ -1,6 +1,7 @@
 // handling keyboard input to update current position at a given speed
 MoveSpaceship.prototype.moveOnKeyPress = function(event) {
-    const speed = 15;
+    const speed = parseInt(document.querySelector(".space__config__rngSpeed").value);
+    // const speed = 15;
     
     switch(event.code) {
         case "KeyW": case "ArrowUp": this.shiftPosition(0, speed*-1); break;
@@ -21,5 +22,11 @@ document.querySelector(".space__config__btn").addEventListener("click", (event) 
     
     document.querySelectorAll(".space__stars").forEach((star) => star.classList.add("space__hidden"));
     
-    createRandomStars(document.querySelector(".space__config__input-stars"));    
+    createRandomStars(document.querySelector(".space__config__txtStars"));    
+});
+
+// prevent game keyboard input from conflicting with speed range slider
+document.querySelector(".space__config__rngSpeed").addEventListener("keydown", (event) => 
+{
+    event.preventDefault();
 });
