@@ -1,0 +1,23 @@
+{
+  "name": "spaceships",
+  "version": "1.0.0",
+  "description": "Here is a basic spaceship game built using JavaScript. The objective is to move the spaceship around to keep destroying all planets and stars on the screen. You can control the spaceship using the arrow keys, WASD keys or by clicking/tapping on the planet or star you wish to destroy.",
+  "main": "./assets/scripts/main.js",
+  "dependencies": {
+    "canvas-confetti": "^1.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saagarshah99/Spaceships.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saagarshah99/Spaceships/issues"
+  },
+  "homepage": "https://github.com/saagarshah99/Spaceships#readme"
+}
