@@ -16,6 +16,12 @@
 .space__hidden {
   display: none;
 }
+.space__stars {
+  opacity: 0.5;
+}
+.space__stars:hover {
+  opacity: 1;
+}
 .space #spaceship {
   display: flex;
   width: 60px;
@@ -31,5 +37,4 @@
 }
 .space .space__config__form {
   z-index: 4;
-  gap: 10px;
 }

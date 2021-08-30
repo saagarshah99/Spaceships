@@ -16,8 +16,14 @@
             <form class="space__config__form" class="flexbox">
                 <section>
                     <label>Number of Planets & Stars: </label>
-                    <input type="number" class="space__config__input-stars" onkeypress="numbersOnly(event)" />
+                    <input type="number" class="space__config__txtStars" onkeypress="numbersOnly(event)" />
                     <input type="submit" value="Update" class="space__config__btn" />
+                </section>
+                
+                <!-- # of pixels moved per keystroke -->
+                <section>
+                    <label>Speed: </label>
+                    <input type="range" class="space__config__rngSpeed" min="1" max="50" value="15" />
                 </section>
             </form>
             <span class="space__config__scoreboard"></span>
