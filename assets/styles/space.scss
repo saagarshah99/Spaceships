@@ -18,6 +18,14 @@
     }
     &__hidden {display: none;}
 
+    // make stars stand out a bit when hovered over
+    &__stars
+    {
+        opacity: 0.5;
+
+        &:hover {opacity: 1;}
+    }
+
     #spaceship
     {
         display: flex;
