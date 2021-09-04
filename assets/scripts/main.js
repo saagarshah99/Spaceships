@@ -1,11 +1,9 @@
 /*****************************SPAWNING/STYLING SPACESHIP & STARS*****************************/
 
-// generating width, position (coordinates) and colour for current new star
 const addStyleToStar = (newStarDiv, i) => {
+    //small white circles every 5 planets to represent stars, random size/colour for rest
     let colour = randomColour();
     let size = randomSize();
-    
-    //small white circles every 5 planets to represent stars
     if(i % 5 === 0) {
         colour = "white";
         size = "20px";
@@ -14,6 +12,7 @@ const addStyleToStar = (newStarDiv, i) => {
     newStarDiv.style.backgroundColor = colour;
     newStarDiv.style.width = newStarDiv.style.height = size;
     
+    // generating random position (coordinates) for current new star
     newStarDiv.style.top = randomPosition("vh");
     newStarDiv.style.bottom = randomPosition("vh");
     newStarDiv.style.left = randomPosition("vw");
@@ -22,8 +21,7 @@ const addStyleToStar = (newStarDiv, i) => {
 
 // generate specific amount of stars w/ random sizes, positions and colours
 const createRandomStars = () => {
-    const txtNumberOfStars = document.querySelector(".space__config__txtStars")
-    
+    const txtNumberOfStars = document.querySelector(".space__config__txtStars");
     if(!txtNumberOfStars.value) txtNumberOfStars.value = 10;
 
     for (let i = 0; i < txtNumberOfStars.value; i++) {
@@ -34,7 +32,7 @@ const createRandomStars = () => {
         newStarDiv.classList.add("space__collidable-object", "space__stars");
         collisionObject.stars.push(new BaseStar(newStarDiv));
 
-        destroyStarOnclick(newStarDiv);
+        destroyStarOnclick(newStarDiv); //enable mouse input
     }
 }
 

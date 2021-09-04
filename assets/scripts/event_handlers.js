@@ -26,10 +26,9 @@ const destroyStarOnclick = (newStarDiv) => {
     });
 }
 
-// handling keyboard input to update current position at a given speed
+// handling keyboard input to update current position at a given speed (# of pixels per keystroke)
 MoveSpaceship.prototype.moveOnKeyPress = function(event) {
     const speed = parseInt(document.querySelector(".space__config__rngSpeed").value);
-    let x = 0; let y = 0;
     
     switch(event.code) {
         case "KeyW": case "ArrowUp": 
@@ -62,7 +61,7 @@ document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyP
 
 /*****************************GAME CONFIG FORM EVENT HANDLERS*****************************/
 
-// hide all current stars and call function randomly generate/update number of stars 
+// hide all current stars and call function to randomly generate/update number of stars 
 document.querySelector(".space__config__btn").addEventListener("click", (event) => {
     event.preventDefault();
     
