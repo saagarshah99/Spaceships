@@ -32,19 +32,28 @@ MoveSpaceship.prototype.moveOnKeyPress = function(event) {
     let x = 0; let y = 0;
     
     switch(event.code) {
-        case "KeyW": case "ArrowUp": y = speed * -1; break;
+        case "KeyW": case "ArrowUp": 
+            this.shiftPosition(0, speed * -1);
+            evaluateGameState();
+            break;
             
-        case "KeyA": case "ArrowLeft": x = speed * -1; break;
+        case "KeyA": case "ArrowLeft": 
+            this.shiftPosition(speed * -1, 0);
+            evaluateGameState();
+            break;
         
-        case "KeyS": case "ArrowDown": y = speed; break;
+        case "KeyS": case "ArrowDown": 
+            this.shiftPosition(0, speed);
+            evaluateGameState();
+            break;
         
-        case "KeyD": case "ArrowRight": x = speed; break;
+        case "KeyD": case "ArrowRight": 
+            this.shiftPosition(speed, 0);
+            evaluateGameState();
+            break;
         
         default: break;
     }
-    
-    this.shiftPosition(x, y);
-    evaluateGameState();
 }
 document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyPress(e));
 
