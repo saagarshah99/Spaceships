@@ -13,7 +13,9 @@ const addStyleToStar = (newStarDiv) => {
 }
 
 // generate specific amount of stars w/ random sizes, positions and colours
-const createRandomStars = (txtNumberOfStars) => {
+const createRandomStars = () => {
+    const txtNumberOfStars = document.querySelector(".space__config__txtStars")
+    
     if(!txtNumberOfStars.value) txtNumberOfStars.value = 10;
 
     for (let i = 0; i < txtNumberOfStars.value; i++) {
@@ -43,9 +45,7 @@ const resetStars = () => {
     const starClass = document.querySelectorAll(".space__stars");
     const hiddenClass = document.querySelectorAll(".space__hidden");
     
-    if(starClass.length == hiddenClass.length) {
-        createRandomStars(document.querySelector(".space__config__txtStars"));
-    }
+    if(starClass.length == hiddenClass.length) createRandomStars();
 }
 
 
@@ -54,7 +54,7 @@ const resetStars = () => {
 
 //main anon function - (spawning spaceship/random stars + resetting scoreboard)
 (function() {
-    createRandomStars(document.querySelector(".space__config__txtStars"));
+    createRandomStars();
     spawnSpaceship(document.querySelector("#spaceship"));
     updateScoreboard();
 })();

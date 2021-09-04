@@ -51,9 +51,11 @@ document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyP
 document.querySelector(".space__config__btn").addEventListener("click", (event) => {
     event.preventDefault();
     
-    document.querySelectorAll(".space__stars").forEach((star) => star.classList.add("space__hidden"));
+    document.querySelectorAll(".space__stars").forEach((star) => {
+        star.classList.add("space__hidden")
+    });
     
-    createRandomStars(document.querySelector(".space__config__txtStars"));    
+    createRandomStars();    
 });
 
 // prevent game keyboard input from conflicting with speed range slider

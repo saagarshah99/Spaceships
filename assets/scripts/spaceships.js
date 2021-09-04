@@ -1,5 +1,5 @@
 // return true if distance between current star and spaceship < their combined radius 
-const compareDistanceAndRadius = (currentStarPosition, spaceshipPosition) => {
+const collisionOccured = (currentStarPosition, spaceshipPosition) => {
     const dx = currentStarPosition.left - spaceshipPosition.left;
     const dy = currentStarPosition.top - spaceshipPosition.top;    
     
@@ -18,10 +18,8 @@ const collisionObject = {
     // loop through stars - if collision detected, hide to "destroy" and accumulate score
     collisionDetection() {
         for (let i = 0; i < this.stars.length; i++) {            
-            if(compareDistanceAndRadius(this.stars[i].position, this.spaceship.position)) {                
-                
+            if(collisionOccured(this.stars[i].position, this.spaceship.position)) {
                 document.querySelectorAll(".space__stars")[i].classList.add("space__hidden");
-                
                 this.numberOfCollisions++;
             }
         }
