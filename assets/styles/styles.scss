@@ -1,5 +1,4 @@
-$primary-bg-colour: rgb(70, 66, 66);
-$secondary-bg-colour: white;
+@import "variables";
 
 /***************************GENERIC PAGE STYLES*************************/
 
@@ -12,6 +11,8 @@ $secondary-bg-colour: white;
 
 body {
     background-color: $primary-bg-colour;
-    color: $secondary-bg-colour;
+    color: white;
     font-weight: bold;
 }
+
+.flexbox {display: flex;}

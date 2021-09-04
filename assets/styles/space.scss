@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /***************************MAIN GAME STYLES*************************/
 
 // positioning different sections of the game screen
@@ -43,4 +44,42 @@
         
         &__form {z-index: 4;}
     }
+=======
+/***************************MAIN GAME STYLES*************************/
+
+// positioning different sections of the game screen
+.space {
+    gap: 100px;
+
+    // generic styles for both spaceship and planets/stars
+    &__collidable-object  {
+        margin: 0 auto;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        border: 5px solid black;
+        z-index: -1;
+    }
+    &__hidden {display: none;}
+
+    #spaceship {
+        background-color: #00d4ff;
+        width: 60px;
+        height: 60px;
+        align-items: center;
+        justify-items: center;
+        
+        img {margin: 0 auto;}
+    }
+
+    // styles for section containing update # of planets/stars form and scoreboard
+    .space__config {
+        margin: 2vw;
+        flex-direction: column;
+        
+        &__form {
+            z-index: 4;
+        }
+    }
+>>>>>>> 22001f3def8f98804de3d0bd21e84d33f1704b27
 }
