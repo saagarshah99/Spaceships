@@ -40,7 +40,7 @@ const createRandomStars = () => {
 const spawnSpaceship = (spaceship) => {
     spaceship.style.left = randomSpawnPoint();
     spaceship.style.top = randomSpawnPoint();
-    spaceship.style.backgroundColor = "#00d4ff";
+    // spaceship.style.backgroundColor = "#00d4ff";
 
     document.querySelector(".space").appendChild(spaceship);
     collisionObject.spaceship = new MoveSpaceship(spaceship);
