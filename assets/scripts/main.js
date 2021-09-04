@@ -1,56 +1,60 @@
-// generate specific amount of stars w/ random sizes, positions (coordinates) and colours
+/*****************************SPAWNING/STYLING SPACESHIP & STARS*****************************/
+
+// generating width, position (coordinates) and colour for current new star
+const addStyleToStar = (newStarDiv) => {
+    newStarDiv.style.width = newStarDiv.style.height = randomSize();
+    
+    newStarDiv.style.top = randomPosition("vh"); 
+    newStarDiv.style.bottom = randomPosition("vh"); 
+    newStarDiv.style.left = randomPosition("vw");
+    newStarDiv.style.right = randomPosition("vw");
+    
+    newStarDiv.style.backgroundColor = randomColour();
+}
+
+// generate specific amount of stars w/ random sizes, positions and colours
 const createRandomStars = (txtNumberOfStars) => {
     if(!txtNumberOfStars.value) txtNumberOfStars.value = 10;
+
     for (let i = 0; i < txtNumberOfStars.value; i++) {
         const newStarDiv = document.createElement("div");
-        
-        newStarDiv.style.width = newStarDiv.style.height = randomSize();
-        
-        newStarDiv.style.top = randomPosition("vh"); 
-        newStarDiv.style.bottom = randomPosition("vh"); 
-        newStarDiv.style.left = randomPosition("vw");
-        newStarDiv.style.right = randomPosition("vw");
-        
-        newStarDiv.style.backgroundColor = randomColour();
+        addStyleToStar(newStarDiv);
 
         document.querySelector(".space").appendChild(newStarDiv);
         newStarDiv.classList.add("space__collidable-object", "space__stars");
         collisionObject.stars.push(new BaseStar(newStarDiv));
 
-        // listening to taps/mouse clicks (collision), hide star and move spaceship to that position
-        newStarDiv.addEventListener("click", (event) => {
-            const spaceship = document.querySelector("#spaceship");
-            
-            spaceship.style.top = newStarDiv.style.top;
-            spaceship.style.bottom = newStarDiv.style.bottom;
-            spaceship.style.left = newStarDiv.style.left;
-            spaceship.style.right = newStarDiv.style.right;
-
-            newStarDiv.classList.add("space__hidden");
-            collisionObject.collisionDetection();
-        });
+        destroyStarOnclick(newStarDiv);
     }
 }
 
-/*
-    - setting up entire game "canvas", listening for keyboard input on page load
-    - creating random stars and new spaceship, then positioning them
-    - initialising scoreboard
-*/ 
-const main = () => {
-    createRandomStars(document.querySelector(".space__config__txtStars"));
-    
-    const spaceship = document.querySelector("#spaceship");    
-
+// creating new spaceship and positioning it
+const spawnSpaceship = (spaceship) => {
     spaceship.style.left = randomSpawnPoint();
     spaceship.style.top = randomSpawnPoint();
     spaceship.style.backgroundColor = "#00d4ff";
 
     document.querySelector(".space").appendChild(spaceship);
     collisionObject.spaceship = new MoveSpaceship(spaceship);
+}
+
+// generate new stars/planets when current set runs out
+const resetStars = () => {
+    const starClass = document.querySelectorAll(".space__stars");
+    const hiddenClass = document.querySelectorAll(".space__hidden");
     
-    document.querySelector(".space__config__scoreboard").innerHTML = getScore();
-    
-    document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyPress(e));    
-}; 
-main();
+    if(starClass.length == hiddenClass.length) {
+        createRandomStars(document.querySelector(".space__config__txtStars"));
+    }
+}
+
+
+
+/*****************************INITIALISING GAME LOGIC*****************************/
+
+//main anon function - (spawning spaceship/random stars + resetting scoreboard)
+(function() {
+    createRandomStars(document.querySelector(".space__config__txtStars"));
+    spawnSpaceship(document.querySelector("#spaceship"));
+    updateScoreboard();
+})();
