@@ -49,8 +49,12 @@ const spawnSpaceship = (spaceship) => {
 const resetStars = () => {
     const starClass = document.querySelectorAll(".space__stars");
     const hiddenClass = document.querySelectorAll(".space__hidden");
+
     
-    if(starClass.length == hiddenClass.length) createRandomStars();
+    if(starClass.length == hiddenClass.length) {
+        explode();
+        createRandomStars();
+    }
 }
 
 
