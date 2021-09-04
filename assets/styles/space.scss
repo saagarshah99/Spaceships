@@ -3,9 +3,6 @@
 // positioning different sections of the game screen
 .space {
     gap: 100px;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
 
     // generic styles for both spaceship and planets/stars
     &__collidable-object  {
@@ -18,16 +15,7 @@
     }
     &__hidden {display: none;}
 
-    // make stars stand out a bit when hovered over
-    // &__stars
-    // {
-    //     opacity: 0.5;
-
-    //     &:hover {opacity: 1;}
-    // }
-
-    #spaceship
-    {
+    #spaceship {
         background-color: #00d4ff;
         width: 60px;
         height: 60px;
@@ -40,7 +28,10 @@
     // styles for section containing update # of planets/stars form and scoreboard
     .space__config {
         margin: 2vw;
+        flex-direction: column;
         
-        &__form {z-index: 4;}
+        &__form {
+            z-index: 4;
+        }
     }
 }
