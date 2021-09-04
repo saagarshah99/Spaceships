@@ -1,8 +1,12 @@
 /*****************************SPACESHIP MOUSE/KEYBOARD INPUT*****************************/
 
+// checking for change of conditions after any mouse/keyboard input and updating accordingly
 const evaluateGameState = () => {
     collisionObject.collisionDetection();
-    updateScoreboard();
+    
+    const scoreboard = document.querySelector(".space__config__scoreboard");
+    scoreboard.innerHTML = collisionObject.numberOfCollisions;
+
     resetStars();
 }
 
@@ -25,19 +29,21 @@ const destroyStarOnclick = (newStarDiv) => {
 // handling keyboard input to update current position at a given speed
 MoveSpaceship.prototype.moveOnKeyPress = function(event) {
     const speed = parseInt(document.querySelector(".space__config__rngSpeed").value);
+    let x = 0; let y = 0;
     
     switch(event.code) {
-        case "KeyW": case "ArrowUp": this.shiftPosition(0, speed*-1); break;
-
-        case "KeyA": case "ArrowLeft": this.shiftPosition(speed*-1, 0); break;
-
-        case "KeyS": case "ArrowDown": this.shiftPosition(0, speed); break;
-
-        case "KeyD": case "ArrowRight": this.shiftPosition(speed, 0); break;
+        case "KeyW": case "ArrowUp": y = speed * -1; break;
+            
+        case "KeyA": case "ArrowLeft": x = speed * -1; break;
+        
+        case "KeyS": case "ArrowDown": y = speed; break;
+        
+        case "KeyD": case "ArrowRight": x = speed; break;
         
         default: break;
     }
-
+    
+    this.shiftPosition(x, y);
     evaluateGameState();
 }
 document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyPress(e));

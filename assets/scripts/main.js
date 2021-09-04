@@ -52,9 +52,8 @@ const resetStars = () => {
 
 /*****************************INITIALISING GAME LOGIC*****************************/
 
-//main anon function - (spawning spaceship/random stars + resetting scoreboard)
+//anonymous function (main) - spawning spaceship/random stars
 (function() {
     createRandomStars();
     spawnSpaceship(document.querySelector("#spaceship"));
-    updateScoreboard();
 })();

@@ -10,16 +10,11 @@ const randomPosition = (unit) => random(0, 80)+unit;
 const randomSpawnPoint = () => random(30, 50)+"%";
 const randomSize = () => random(30, 80)+"px";
 
-// fetch score from object and update scoreboard
-const getScore = () => "Score: "+collisionObject.numberOfCollisions;
-const updateScoreboard = () => document.querySelector(".space__config__scoreboard").innerHTML = getScore();
-
 //prevent non-numeric input from even occuring
 const numbersOnly = (event) => {
 	const inputText = String.fromCharCode(event.which);
 
-    if(!(/[0-9 .]/.test(inputText))) 
-    {
+    if(!(/[0-9 .]/.test(inputText))) {
         event.preventDefault()
     };
 }
