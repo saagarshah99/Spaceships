@@ -1,56 +1,64 @@
-// generate specific amount of stars w/ random sizes, positions (coordinates) and colours
-const createRandomStars = (txtNumberOfStars) => {
+/*****************************SPAWNING/STYLING SPACESHIP & STARS*****************************/
+
+const addStyleToStar = (newStarDiv, i) => {
+    //small white circles every 5 planets to represent stars, random size/colour for rest
+    let colour = randomColour();
+    let size = randomSize();
+    if(i % 5 === 0) {
+        colour = "white";
+        size = "20px";
+    } 
+    
+    newStarDiv.style.backgroundColor = colour;
+    newStarDiv.style.width = newStarDiv.style.height = size;
+    
+    // generating random position (coordinates) for current new star
+    newStarDiv.style.top = randomPosition("vh");
+    newStarDiv.style.bottom = randomPosition("vh");
+    newStarDiv.style.left = randomPosition("vw");
+    newStarDiv.style.right = randomPosition("vw");
+}
+
+// generate specific amount of stars w/ random sizes, positions and colours
+const createRandomStars = () => {
+    const txtNumberOfStars = document.querySelector(".space__config__txtStars");
     if(!txtNumberOfStars.value) txtNumberOfStars.value = 10;
+
     for (let i = 0; i < txtNumberOfStars.value; i++) {
         const newStarDiv = document.createElement("div");
-        
-        newStarDiv.style.width = newStarDiv.style.height = randomSize();
-        
-        newStarDiv.style.top = randomPosition("vh"); 
-        newStarDiv.style.bottom = randomPosition("vh"); 
-        newStarDiv.style.left = randomPosition("vw");
-        newStarDiv.style.right = randomPosition("vw");
-        
-        newStarDiv.style.backgroundColor = randomColour();
+        addStyleToStar(newStarDiv, i);
 
         document.querySelector(".space").appendChild(newStarDiv);
         newStarDiv.classList.add("space__collidable-object", "space__stars");
         collisionObject.stars.push(new BaseStar(newStarDiv));
 
-        // listening to taps/mouse clicks (collision), hide star and move spaceship to that position
-        newStarDiv.addEventListener("click", (event) => {
-            const spaceship = document.querySelector("#spaceship");
-            
-            spaceship.style.top = newStarDiv.style.top;
-            spaceship.style.bottom = newStarDiv.style.bottom;
-            spaceship.style.left = newStarDiv.style.left;
-            spaceship.style.right = newStarDiv.style.right;
-
-            newStarDiv.classList.add("space__hidden");
-            collisionObject.collisionDetection();
-        });
+        destroyStarOnclick(newStarDiv); //enable mouse input
     }
 }
 
-/*
-    - setting up entire game "canvas", listening for keyboard input on page load
-    - creating random stars and new spaceship, then positioning them
-    - initialising scoreboard
-*/ 
-const main = () => {
-    createRandomStars(document.querySelector(".space__config__txtStars"));
-    
-    const spaceship = document.querySelector("#spaceship");    
-
+// creating new spaceship and positioning it
+const spawnSpaceship = (spaceship) => {
     spaceship.style.left = randomSpawnPoint();
     spaceship.style.top = randomSpawnPoint();
-    spaceship.style.backgroundColor = "#00d4ff";
 
     document.querySelector(".space").appendChild(spaceship);
     collisionObject.spaceship = new MoveSpaceship(spaceship);
+}
+
+// generate new stars/planets when current set runs out
+const resetStars = () => {
+    const starClass = document.querySelectorAll(".space__stars");
+    const hiddenClass = document.querySelectorAll(".space__hidden");
     
-    document.querySelector(".space__config__scoreboard").innerHTML = getScore();
-    
-    document.addEventListener("keydown", (e) => collisionObject.spaceship.moveOnKeyPress(e));    
-}; 
-main();
+    if(starClass.length == hiddenClass.length) createRandomStars();
+}
+
+
+
+/*****************************INITIALISING GAME LOGIC*****************************/
+
+//anonymous function (main) - spawning spaceship/random stars
+(function() {
+    createRandomStars();
+    spawnSpaceship(document.querySelector("#spaceship"));
+})();

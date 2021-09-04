@@ -13,7 +13,7 @@
 <body>    
     <div class="space flexbox">        
         <section class="space__config flexbox">
-            <form class="space__config__form" class="flexbox">
+            <form class="space__config__form">
                 <section>
                     <label>Number of Planets & Stars: </label>
                     <input type="number" class="space__config__txtStars" onkeypress="numbersOnly(event)" />
@@ -26,9 +26,9 @@
                     <input type="range" class="space__config__rngSpeed" min="1" max="50" value="15" />
                 </section>
             </form>
-            <span class="space__config__scoreboard"></span>
+            <p>Score: <span class="space__config__scoreboard">0</span></p>
         </section>
-        <div id="spaceship" class="space__collidable-object">
+        <div id="spaceship" class="space__collidable-object flexbox">
             <img src="./assets/images/alien_icon.png" width="50" height="50" />
         </div>
     </div>

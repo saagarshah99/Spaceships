@@ -1,9 +1,6 @@
 /***************************MAIN GAME STYLES*************************/
 .space {
   gap: 100px;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
 }
 .space__collidable-object {
   margin: 0 auto;
@@ -17,7 +14,7 @@
   display: none;
 }
 .space #spaceship {
-  display: flex;
+  background-color: #00d4ff;
   width: 60px;
   height: 60px;
   align-items: center;
@@ -28,6 +25,7 @@
 }
 .space .space__config {
   margin: 2vw;
+  flex-direction: column;
 }
 .space .space__config__form {
   z-index: 4;
